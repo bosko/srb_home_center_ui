@@ -17,7 +17,9 @@ defmodule SrbHomeCenterUiWeb.Router do
   scope "/", SrbHomeCenterUiWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    get "/", HomeDashboardController, :index
+
+    live "/old_page_live", PageLive, :index
   end
 
   # Other scopes may use custom stacks.
