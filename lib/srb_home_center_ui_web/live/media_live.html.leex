@@ -1,3 +1,63 @@
-<div class="card">
-  <%= @results.current_time %>
+<div class="card multimedia">
+  <div class="title">Lists</div>
+  <div class="player">
+    <div class="controls">
+      <span class="fas fa-backward backward"></span>
+      <span class="fas fa-pause pause"></span>
+      <span class="fas fa-play play-stop"></span>
+      <span class="fas fa-forward forward"></span>
+    </div>
+
+    <div class="current-list">
+      Naxi Cafe
+    </div>
+
+    <div class="current-song">
+      Berry White - Let the Music Play
+    </div>
+  </div>
+
+  <div class="lists">
+    <select>
+      <option value="radio">Radio</option>
+      <option value="tamburasi">Tamburasi</option>
+      <option value="klasika">Klasika</option>
+    </select>
+
+    <div class="head">
+      <div class="column">
+        Name
+      </div>
+      <div class="column">
+        Duration
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="list-row">
+        <div>Naxi Cafe</div>
+        <div class="right">00:00</div>
+      </div>
+      <div class="list-row">
+        <div>Karolina</div>
+        <div class="right">00:00</div>
+      </div>
+      <div class="list-row">
+        <div>RMC</div>
+        <div class="right">00:00</div>
+      </div>
+      <div class="list-row">
+        <div>RMC 80s</div>
+        <div class="right">00:00</div>
+      </div>
+      <div class="list-row">
+        <div>RMC 90s</div>
+        <div class="right">00:00</div>
+      </div>
+      <div class="list-row">
+        <div>RMC 00s</div>
+        <div class="right">00:00</div>
+      </div>
+    </div>
+  </div>
 </div>
