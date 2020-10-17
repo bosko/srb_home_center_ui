@@ -2,57 +2,64 @@
   padding: 18px 20px 18px 20px;
   background: $card-color 0% 0% no-repeat padding-box;
   color: white;
-  width: 348px;
+  width: 730px;
   height: 375px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
 
   .title {
     font-family: Roboto;
     font-weight: 500;
     font-size: 14px;
-    text-align: left;
+    text-align: center;
     text-transform: uppercase;
     color: #fff;
   }
 
-  &.multimedia {
+  .multimedia {
+    display: flex;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
     line-height: 16px;
+    height: 95%;
 
-    .player {
-      border-bottom: 1px solid $gray-color;
-      flex: 0 0 30%;
+    .songs-head {
+      display: flex;
+      justify-content: space-between;
+      color: $orange-color;
+      font-family: Roboto;
+      font-weight: 300;
+      font-size: 18px;
+      border-bottom: 1px solid $orange-color;
+      padding-bottom: 5px;
+    }
 
-      .controls {
-        font-size: 23px;
-        text-align: center;
-        margin-top: 14px;
-        margin-bottom: 14px;
-
-        span {
-          margin-right: 7px;
-          cursor: pointer;
-        }
-      }
-
-      .current-list {
-        font-weight: 300;
-        font-size: 18px;
-        line-height: 24px;
-      }
-
-      .current-song {
-        margin-bottom: 12px
+    .songs {
+      height: 266px;
+      overflow: auto;
+      .song-row {
+        display: flex;
+        justify-content: space-between;
+        height: 38px;
+        padding-top: 8px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $body-color;
+        cursor: pointer;
       }
     }
 
+    .queue {
+      height: 190px;
+    }
+
     .lists {
-      flex: 0 0 70%;
+      flex: 1;
+      padding-right: 18px;
+      border-right: 1px solid $orange-color;
+
+      form {
+        margin-bottom: 0px;
+      }
 
       select {
         margin-top: 14px;
@@ -61,28 +68,32 @@
         height: 19px;
         width: 100%;
       }
+    }
 
-      .head {
-        display: flex;
-        justify-content: space-between;
-        color: $orange-color;
-        font-family: Roboto;
+    .player {
+      flex: 1;
+      padding-left: 18px;
+
+      .current-list {
         font-weight: 300;
         font-size: 18px;
-        border-bottom: 1px solid $orange-color;
-        padding-bottom: 5px;
+        line-height: 24px;
+        text-align: center;
       }
 
-      .content {
-        height: 152px;
-        overflow: auto;
-        .list-row {
-          display: flex;
-          justify-content: space-between;
-          height: 38px;
-          padding-top: 8px;
-          padding-bottom: 10px;
-          border-bottom: 1px solid $body-color;
+      .current-song {
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      .controls {
+        font-size: 23px;
+        text-align: center;
+        margin-top: 19px;
+        margin-bottom: 19px;
+
+        span {
+          margin-right: 7px;
           cursor: pointer;
         }
       }
