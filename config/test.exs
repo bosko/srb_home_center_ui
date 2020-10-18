@@ -8,3 +8,5 @@ config :srb_home_center_ui, SrbHomeCenterUiWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :mpdex, :mpd_client, Mpdex.TestClient

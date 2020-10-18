@@ -1,62 +1,57 @@
-<div class="card multimedia">
-  <div class="title">Lists</div>
-  <div class="player">
-    <div class="controls">
-      <span class="fas fa-backward backward"></span>
-      <span class="fas fa-pause pause"></span>
-      <span class="fas fa-play play-stop"></span>
-      <span class="fas fa-forward forward"></span>
-    </div>
+<div class="card">
+  <div class="title">Player</div>
 
-    <div class="current-list">
-      Naxi Cafe
-    </div>
+  <div class="multimedia">
+    <div class="lists">
+      <form phx-change="select_list">
+        <select name="selected-list">
+          <option></option>
+          <%= options_for_select(Enum.map(@lists, fn list -> Keyword.get(list, :playlist) end), @loaded_list) %>
+        </select>
+      </form>
 
-    <div class="current-song">
-      Berry White - Let the Music Play
-    </div>
-  </div>
-
-  <div class="lists">
-    <select>
-      <option value="radio">Radio</option>
-      <option value="tamburasi">Tamburasi</option>
-      <option value="klasika">Klasika</option>
-    </select>
-
-    <div class="head">
-      <div class="column">
-        Name
-      </div>
-      <div class="column">
-        Duration
+      <div class="songs">
+        <%= for song <- Enum.map(@songs, &SrbHomeCenterUiWeb.PlaylistHelpers.display/1) do %>
+          <div class="song-row">
+            <div class="song-name">
+              <div><%= song.metadata.title %></div>
+            </div>
+            <div class="song-details">
+              <div>
+                <%= "#{song.metadata.artist} - #{song.metadata.album} - #{SrbHomeCenterUiWeb.PlaylistHelpers.display_duration(song.metadata.duration)}" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
 
-    <div class="content">
-      <div class="list-row">
-        <div>Naxi Cafe</div>
-        <div class="right">00:00</div>
+    <div class="player">
+      <div class="current-list">
+        Naxi Cafe
       </div>
-      <div class="list-row">
-        <div>Karolina</div>
-        <div class="right">00:00</div>
+
+      <div class="current-song">
+        Berry White - Let the Music Play
       </div>
-      <div class="list-row">
-        <div>RMC</div>
-        <div class="right">00:00</div>
+
+      <div class="controls">
+        <span class="fas fa-backward backward"></span>
+        <span class="fas fa-pause pause"></span>
+        <span class="fas fa-play play-stop"></span>
+        <span class="fas fa-forward forward"></span>
       </div>
-      <div class="list-row">
-        <div>RMC 80s</div>
-        <div class="right">00:00</div>
+
+      <div class="songs-head">
+        <div class="column">
+          Name
+        </div>
+        <div class="column">
+          Duration
+        </div>
       </div>
-      <div class="list-row">
-        <div>RMC 90s</div>
-        <div class="right">00:00</div>
-      </div>
-      <div class="list-row">
-        <div>RMC 00s</div>
-        <div class="right">00:00</div>
+
+      <div class="songs queue">
       </div>
     </div>
   </div>

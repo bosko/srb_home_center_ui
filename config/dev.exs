@@ -65,3 +65,11 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :mpdex, :mpd_client, Mpdex.SocketClient
+
+config :mpdex,
+  media_server: [
+    host: "192.168.0.17",
+    port: 6600
+  ]

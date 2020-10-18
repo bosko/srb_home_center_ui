@@ -39,12 +39,24 @@
       overflow: auto;
       .song-row {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         height: 38px;
         padding-top: 8px;
         padding-bottom: 10px;
         border-bottom: 1px solid $body-color;
         cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .song-name {
+          flex: 0 0 50%;
+          font-size: 14px;
+        }
+
+        .song-details {
+          flex: 0 0 50%;
+        }
       }
     }
 
@@ -53,7 +65,8 @@
     }
 
     .lists {
-      flex: 1;
+      min-width: 0;
+      flex: 0 0 50%;
       padding-right: 18px;
       border-right: 1px solid $orange-color;
 
@@ -71,7 +84,7 @@
     }
 
     .player {
-      flex: 1;
+      flex: 0 0 50%;
       padding-left: 18px;
 
       .current-list {

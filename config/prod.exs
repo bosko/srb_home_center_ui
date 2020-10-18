@@ -16,6 +16,12 @@ config :srb_home_center_ui, SrbHomeCenterUiWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :mpdex, :mpd_client, Mpdex.SocketClient
+
+config :media_server,
+  host: "192.168.0.17",
+  port: 6600
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
