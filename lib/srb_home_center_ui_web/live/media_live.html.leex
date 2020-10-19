@@ -13,13 +13,17 @@
       <div class="songs">
         <%= for song <- Enum.map(@songs, &SrbHomeCenterUiWeb.PlaylistHelpers.display/1) do %>
           <div class="song-row">
-            <div class="song-name">
-              <div><%= song.metadata.title %></div>
-            </div>
-            <div class="song-details">
-              <div>
+            <div class="song-info">
+              <div class="song-name">
+                <%= song.metadata.title %>
+              </div>
+              <div class="song-details">
                 <%= "#{song.metadata.artist} - #{song.metadata.album} - #{SrbHomeCenterUiWeb.PlaylistHelpers.display_duration(song.metadata.duration)}" %>
               </div>
+            </div>
+            <div class="song-actions">
+              <span class="fa fa-plus"></span>
+              <span class="fa fa-play"></span>
             </div>
           </div>
         <% end %>

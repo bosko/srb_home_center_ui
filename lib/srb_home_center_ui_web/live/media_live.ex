@@ -9,10 +9,12 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_event("select_list", %{"selected-list" => list_name}, socket) do
-    {:ok, songs} = Mpdex.Playlists.get(list_name)
-    socket = assign(socket, loaded_list: list_name, songs: songs)
-
-    {:noreply, socket}
+    if list_name == "" do
+      {:noreply, socket}
+    else
+      {:ok, songs} = Mpdex.Playlists.get(list_name)
+      {:noreply, assign(socket, loaded_list: list_name, songs: songs)}
+    end
   end
 
   @impl true
