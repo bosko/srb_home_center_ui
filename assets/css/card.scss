@@ -97,7 +97,7 @@
       }
 
       select {
-        margin-top: 14px;
+        margin-top: 11px;
         padding-top: 0px;
         padding-bottom: 0px;
         height: 19px;
@@ -107,29 +107,78 @@
 
     .player {
       flex: 0 0 50%;
+      padding-top: 11px;
       padding-left: 18px;
 
-      .current-list {
-        font-weight: 300;
-        font-size: 18px;
-        line-height: 24px;
-        text-align: center;
-      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
 
-      .current-song {
-        margin-bottom: 12px;
-        text-align: center;
-      }
+        .volume {
+          color: $orange-color;
+          font-size: 30px;
+          text-align: center;
+          flex: 0 0 15%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
 
-      .controls {
-        font-size: 23px;
-        text-align: center;
-        margin-top: 19px;
-        margin-bottom: 19px;
+          .value {
+            line-height: 26px;
+            padding-top:6px
+          }
 
-        span {
-          margin-right: 7px;
-          cursor: pointer;
+          .up {
+            cursor: pointer;
+          }
+
+          .down {
+            font-size: 36px;
+            line-height: 10px;
+            cursor: pointer;
+          }
+
+          .bitrate {
+            font-size: 12px;
+          }
+        }
+
+        .current-wrapper {
+          flex: 0 0 70%;
+
+          .current-list {
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 24px;
+            text-align: center;
+          }
+
+          .current-song {
+            margin-bottom: 12px;
+            text-align: center;
+          }
+
+          .controls {
+            font-size: 23px;
+            text-align: center;
+            margin-top: 19px;
+            margin-bottom: 19px;
+
+            span {
+              margin-right: 7px;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .extra {
+          flex: 0 0 15%;
+          text-align: right;
+
+          i {
+            cursor: pointer;
+          }
         }
       }
     }
