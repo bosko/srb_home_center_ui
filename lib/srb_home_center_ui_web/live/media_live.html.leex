@@ -33,9 +33,9 @@
     <div class="player">
       <div class="header">
         <div class="volume">
-          <div class="up">+</div>
-          <div class="value">10</div>
-          <div class="down">-</div>
+          <i class="fa fa-volume-up" phx-click="inc_volume"></i>
+          <div class="value"><%= Keyword.get(@player_status, :volume) %></div>
+          <i class="fa fa-volume-down" phx-click="dec_volume"></i>
           <div class="bitrate">128</div>
         </div>
 
@@ -83,10 +83,6 @@
                 <div class="song-details">
                   <%= "#{song.metadata.artist} - #{song.metadata.album} - #{display_duration(song.metadata.duration)}" %>
                 </div>
-              </div>
-              <div class="song-actions">
-                <span class="fa fa-plus"></span>
-                <span class="fa fa-play"></span>
               </div>
             </div>
           <% end %>

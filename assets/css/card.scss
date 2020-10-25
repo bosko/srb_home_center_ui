@@ -118,7 +118,6 @@
 
         .volume {
           color: $orange-color;
-          font-size: 30px;
           text-align: center;
           flex: 0 0 15%;
           display: flex;
@@ -127,16 +126,17 @@
 
           .value {
             line-height: 26px;
-            padding-top:6px
+            padding-top:6px;
+            font-size: 30px;
           }
 
-          .up {
+          .fa-volume-up {
+            font-size: 17px;
             cursor: pointer;
           }
 
-          .down {
-            font-size: 36px;
-            line-height: 10px;
+          .fa-volume-down {
+            font-size: 17px;
             cursor: pointer;
           }
 
@@ -182,9 +182,12 @@
         .extra {
           flex: 0 0 15%;
           text-align: right;
+          display: flex;
+          flex-direction: column;
 
           i {
             cursor: pointer;
+            margin-bottom: 3px;
           }
         }
       }
