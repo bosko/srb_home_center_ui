@@ -1,5 +1,5 @@
 defmodule SrbHomeCenterUiWeb.PlaylistHelpers do
-  def display(song) do
+  def display_song(song) do
     display = Enum.into(song, %{})
 
     [artist, album, title] = extract_from_file(display.file)
@@ -70,6 +70,14 @@ defmodule SrbHomeCenterUiWeb.PlaylistHelpers do
       name = Path.basename(file_path, Path.extname(file_path))
 
       [artist, album, name]
+    end
+  end
+
+  def status_flag_class(status, flag) do
+    if Keyword.get(status, flag) == "1" do
+      "orange"
+    else
+      ""
     end
   end
 end

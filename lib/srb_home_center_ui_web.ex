@@ -89,6 +89,9 @@ defmodule SrbHomeCenterUiWeb do
 
       import SrbHomeCenterUiWeb.ErrorHelpers
       import SrbHomeCenterUiWeb.Gettext
+
+      import SrbHomeCenterUiWeb.PlaylistHelpers
+
       alias SrbHomeCenterUiWeb.Router.Helpers, as: Routes
     end
   end
