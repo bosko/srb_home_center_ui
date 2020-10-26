@@ -74,10 +74,15 @@ defmodule SrbHomeCenterUiWeb.PlaylistHelpers do
   end
 
   def status_flag_class(status, flag) do
-    if Keyword.get(status, flag) == "1" do
-      "orange"
-    else
-      ""
+    cond do
+      flag == :volume && Keyword.get(status, flag) == "0" ->
+        "orange"
+
+      flag != :volume && Keyword.get(status, flag) == "1" ->
+        "orange"
+
+      true ->
+        ""
     end
   end
 end
