@@ -68,6 +68,29 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   end
 
   @impl true
+  def handle_event("play_pause", _, socket) do
+    case Keyword.get(Mpdex.status(), :state) do
+      "stop" ->
+        Mpdex.play(:position, 0)
+
+      "pause" ->
+        Mpdex.resume()
+
+      "play" ->
+        Mpdex.pause()
+    end
+
+    {:noreply, assign(socket, player_status: Mpdex.status())}
+  end
+
+  @impl true
+  def handle_event("stop_playing", _, socket) do
+    Mpdex.stop()
+
+    {:noreply, assign(socket, player_status: Mpdex.status())}
+  end
+
+  @impl true
   def handle_info(:tick, socket) do
     {:noreply,
      assign(socket, lists: [[{:playlist, "nova"}]])}
