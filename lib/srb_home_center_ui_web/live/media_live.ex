@@ -72,7 +72,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   end
 
   defp currently_playing(queue, player_status) do
-    song = String.to_integer(Keyword.get(player_status, :song, "0")) - 1
+    song = String.to_integer(Keyword.get(player_status, :song, "0"))
     if song >= 0 do
       %{
         list: get_in(Enum.at(queue, song), [:metadata, :name]),
