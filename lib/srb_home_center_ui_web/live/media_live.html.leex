@@ -49,7 +49,7 @@
           </div>
 
           <div class="controls">
-            <span class="fas fa-backward" phx-click="backward"></span>
+            <span class="fas fa-backward" phx-click="play-previous"></span>
 
             <%= if Keyword.get(@player_status, :state) == "play" do %>
               <span class="fas fa-pause play-pause" phx-click="play_pause"></span>
@@ -58,7 +58,7 @@
             <% end %>
 
             <span class="fas fa-stop stop" phx-click="stop_playing"></span>
-            <span class="fas fa-forward" phx-click="forward"></span>
+            <span class="fas fa-forward" phx-click="play-next"></span>
           </div>
         </div>
 

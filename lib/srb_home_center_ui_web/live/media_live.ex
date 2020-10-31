@@ -6,6 +6,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
     Mpdex.configure(Application.get_env(:mpdex, :media_server))
     player_status = Mpdex.status()
     {:ok, queue} = Mpdex.queue()
+
     status = %{
       lists: Mpdex.list(),
       loaded_list: nil,
@@ -43,6 +44,38 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
     {:ok, queue} = Mpdex.queue()
     {:noreply, assign(socket, :queue, queue)}
+  end
+
+  @impl true
+  def handle_event("play-previous", _, socket) do
+    Mpdex.previous()
+
+    {:ok, queue} = Mpdex.queue()
+    player_status = Mpdex.status()
+
+    socket =
+      assign(socket,
+        player_status: player_status,
+        currently_playing: currently_playing(queue, player_status)
+      )
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("play-next", _, socket) do
+    Mpdex.next()
+
+    {:ok, queue} = Mpdex.queue()
+    player_status = Mpdex.status()
+
+    socket =
+      assign(socket,
+        player_status: player_status,
+        currently_playing: currently_playing(queue, player_status)
+      )
+
+    {:noreply, socket}
   end
 
   @impl true
@@ -109,12 +142,12 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_info(:tick, socket) do
-    {:noreply,
-     assign(socket, lists: [[{:playlist, "nova"}]])}
+    {:noreply, assign(socket, lists: [[{:playlist, "nova"}]])}
   end
 
   defp currently_playing(queue, player_status) do
     song = String.to_integer(Keyword.get(player_status, :song, "0"))
+
     if song >= 0 do
       %{
         list: get_in(Enum.at(queue, song), [:metadata, :name]),
