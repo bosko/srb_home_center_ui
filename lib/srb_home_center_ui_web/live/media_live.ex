@@ -29,6 +29,23 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   end
 
   @impl true
+  def handle_event("add-to-queue", %{"file" => file}, socket) do
+    Mpdex.add_to_queue(file)
+
+    {:ok, queue} = Mpdex.queue()
+    {:noreply, assign(socket, :queue, queue)}
+  end
+
+  @impl true
+  def handle_event("replace-queue", %{"file" => file}, socket) do
+    Mpdex.clear()
+    Mpdex.add_to_queue(file)
+
+    {:ok, queue} = Mpdex.queue()
+    {:noreply, assign(socket, :queue, queue)}
+  end
+
+  @impl true
   def handle_event("inc_volume", _, socket) do
     change_volume(1)
 

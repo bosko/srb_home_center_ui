@@ -22,8 +22,8 @@
               </div>
             </div>
             <div class="song-actions">
-              <span class="fa fa-plus" phx-click="add-to-queue"></span>
-              <span class="fa fa-play" phx-click="replace-queue"></span>
+              <span class="fa fa-plus" phx-click="add-to-queue" phx-value-file="<%= song.file %>"></span>
+              <span class="fa fa-play" phx-click="replace-queue" phx-value-file="<%= song.file %>"></span>
             </div>
           </div>
         <% end %>
