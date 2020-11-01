@@ -82,13 +82,16 @@
         <div class="songs">
           <%= for song <- @queue do %>
             <div class="song-row">
-              <div class="song-info">
+              <div class="column song-info">
                 <div class="song-name">
                   <%= song.metadata.title %>
                 </div>
                 <div class="song-details">
-                  <%= "#{song.metadata.artist} - #{song.metadata.album} - #{display_duration(song.metadata.time)}" %>
+                  <%= "#{song.metadata.artist} - #{song.metadata.album}" %>
                 </div>
+              </div>
+              <div class="column">
+                <%= display_duration(song.metadata.time) %>
               </div>
             </div>
           <% end %>
