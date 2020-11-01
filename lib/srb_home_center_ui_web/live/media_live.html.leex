@@ -63,9 +63,11 @@
         </div>
 
         <div class="extra">
-            <i class="fa fa-random <%= status_flag_class(@player_status, :random) %>" phx-click="toggle_shuffle"></i>
+          <i class="fa fa-random <%= status_flag_class(@player_status, :random) %>"
+             phx-click="toggle_shuffle"></i>
 
-            <i class="fa fa-volume-mute <%= status_flag_class(@player_status, :volume) %>" phx-click="toggle_mute"></i>
+          <i class="fa fa-volume-mute <%= status_flag_class(@player_status, :volume) %>"
+             phx-click="toggle_mute"></i>
         </div>
       </div>
 
