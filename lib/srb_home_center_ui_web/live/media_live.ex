@@ -11,7 +11,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
           queue
 
         {:error, _} ->
-          %{}
+          []
       end
 
     status = %{
@@ -63,7 +63,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
           queue
 
         {:error, _} ->
-          %{}
+          []
       end
     player_status = Mpdex.status()
 
@@ -86,7 +86,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
           queue
 
         {:error, _} ->
-          %{}
+          []
       end
     player_status = Mpdex.status()
 
@@ -169,7 +169,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
     {:noreply, assign(socket, lists: [[{:playlist, "nova"}]])}
   end
 
-  defp currently_playing(queue, player_status) do
+  defp currently_playing(queue, player_status = %{}) do
     song = Map.get(player_status, :song, "-1") |> String.to_integer()
 
     if song >= 0 do
