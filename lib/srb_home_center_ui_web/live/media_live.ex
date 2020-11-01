@@ -5,7 +5,14 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   def mount(_params, _session, socket) do
     Mpdex.configure(Application.get_env(:mpdex, :media_server))
     player_status = Mpdex.status()
-    {:ok, queue} = Mpdex.queue()
+    queue =
+      case Mpdex.queue() do
+        {:ok, queue} ->
+          queue
+
+        {:error, _} ->
+          %{}
+      end
 
     status = %{
       lists: Mpdex.list(),
@@ -50,7 +57,14 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   def handle_event("play-previous", _, socket) do
     Mpdex.previous()
 
-    {:ok, queue} = Mpdex.queue()
+    queue =
+      case Mpdex.queue() do
+        {:ok, queue} ->
+          queue
+
+        {:error, _} ->
+          %{}
+      end
     player_status = Mpdex.status()
 
     socket =
@@ -66,10 +80,17 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   def handle_event("play-next", _, socket) do
     Mpdex.next()
 
-    {:ok, queue} = Mpdex.queue()
+    queue =
+      case Mpdex.queue() do
+        {:ok, queue} ->
+          queue
+
+        {:error, _} ->
+          %{}
+      end
     player_status = Mpdex.status()
 
-    socket =
+     socket =
       assign(socket,
         player_status: player_status,
         currently_playing: currently_playing(queue, player_status)
@@ -94,7 +115,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_event("toggle_shuffle", _, socket) do
-    case Keyword.get(Mpdex.status(), :random) do
+    case Mpdex.status().random do
       "0" ->
         Mpdex.shuffle_queue([])
         Mpdex.random_on()
@@ -108,7 +129,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_event("toggle_mute", _, socket) do
-    if Keyword.get(Mpdex.status(), :volume) != "0" do
+    if Mpdex.status().volume != "0" do
       Mpdex.volume(0)
     else
       Mpdex.volume(1)
@@ -119,7 +140,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_event("play_pause", _, socket) do
-    case Keyword.get(Mpdex.status(), :state) do
+    case Map.get(Mpdex.status(), :state) do
       "stop" ->
         Mpdex.play(:position, 0)
 
@@ -128,6 +149,9 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
       "play" ->
         Mpdex.pause()
+
+      _ ->
+        nil
     end
 
     {:noreply, assign(socket, player_status: Mpdex.status())}
@@ -146,7 +170,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   end
 
   defp currently_playing(queue, player_status) do
-    song = String.to_integer(Keyword.get(player_status, :song, "0"))
+    song = Map.get(player_status, :song, "-1") |> String.to_integer()
 
     if song >= 0 do
       %{
@@ -159,10 +183,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   end
 
   defp change_volume(amount) when is_integer(amount) do
-    volume =
-      Mpdex.status()
-      |> Keyword.get(:volume)
-      |> String.to_integer()
+    volume = Map.get(Mpdex.Status.status(), :volume, "0") |> String.to_integer()
 
     if (amount == 1 && volume < 100) || (amount == -1 && volume > 0) do
       Mpdex.volume(volume + amount)

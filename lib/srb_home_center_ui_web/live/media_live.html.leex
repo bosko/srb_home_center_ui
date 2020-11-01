@@ -34,7 +34,7 @@
       <div class="header">
         <div class="volume">
           <i class="fa fa-volume-up" phx-click="inc_volume"></i>
-          <div class="value"><%= Keyword.get(@player_status, :volume) %></div>
+          <div class="value"><%= @player_status.volume %></div>
           <i class="fa fa-volume-down" phx-click="dec_volume"></i>
           <div class="bitrate">128</div>
         </div>
@@ -51,7 +51,7 @@
           <div class="controls">
             <span class="fas fa-backward" phx-click="play-previous"></span>
 
-            <%= if Keyword.get(@player_status, :state) == "play" do %>
+            <%= if @player_status.state == "play" do %>
               <span class="fas fa-pause play-pause" phx-click="play_pause"></span>
             <% else %>
               <span class="fas fa-play play-pause" phx-click="play_pause"></span>
@@ -82,8 +82,8 @@
         </div>
 
         <div class="songs">
-          <%= for song <- @queue do %>
-            <div class="song-row">
+          <%= for {song, index} <- Enum.with_index(@queue) do %>
+            <div class="song-row <%= queue_song_row_class(index, @player_status) %>">
               <div class="column song-info">
                 <div class="song-name">
                   <%= song.metadata.title %>
