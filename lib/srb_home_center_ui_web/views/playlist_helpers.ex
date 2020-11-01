@@ -31,7 +31,7 @@ defmodule SrbHomeCenterUiWeb.PlaylistHelpers do
   def queue_song_row_class(index, player_status) do
     song = Map.get(player_status, :song, "-1") |> String.to_integer()
     if index == song do
-      "current_song"
+      "current-song"
     else
       ""
     end

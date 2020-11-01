@@ -37,12 +37,19 @@
     .songs {
       height: 266px;
       overflow: auto;
+
+      .current-song {
+        color: $orange-color;
+        border-left: 3px solid $orange-color;
+      }
+
       .song-row {
         display: flex;
         justify-content: space-between;
         align-items: first baseline;
         padding-top: 6px;
         padding-bottom: 0px;
+        padding-left: 5px;
         border-bottom: 1px solid $body-color;
         height: 43px;
         margin-bottom: 1px;
