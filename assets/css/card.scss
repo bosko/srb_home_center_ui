@@ -35,7 +35,6 @@
     }
 
     .songs {
-      height: 266px;
       overflow: auto;
 
       .current-song {
@@ -91,6 +90,10 @@
 
     .queue {
       height: 190px;
+
+      .songs {
+        height: 175px;
+      }
     }
 
     .lists {
@@ -98,6 +101,10 @@
       flex: 0 0 50%;
       padding-right: 18px;
       border-right: 1px solid $orange-color;
+
+      .songs {
+        height: 266px;
+      }
 
       form {
         margin-bottom: 0px;
