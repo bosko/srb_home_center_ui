@@ -95,7 +95,19 @@
                 </div>
               </div>
               <div class="column">
-                <%= display_duration(song.metadata.time) %>
+                <div>
+                  <%= display_duration(song.metadata.time) %>
+                </div>
+                <div class="song-actions">
+                  <span
+                    class="fa fa-minus"
+                    phx-click="queue-remove-song"
+                    phx-value-file="<%= song.file %>"></span>
+                  <span
+                    class="fa fa-play"
+                    phx-click="queue-play-song"
+                    phx-value-file="<%= song.file %>"></span>
+                </div>
               </div>
             </div>
           <% end %>
