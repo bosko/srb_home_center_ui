@@ -83,7 +83,9 @@
 
         <div class="songs">
           <%= for {song, index} <- Enum.with_index(@queue) do %>
-            <div class="song-row <%= queue_song_row_class(index, @player_status) %>">
+            <div
+              class="song-row queue-song <%= queue_song_row_class(index, @player_status) %>"
+              data-queue-index="<%= index %>">
               <div class="column song-info">
                 <div class="song-name">
                   <%= song.metadata.title %>
@@ -101,4 +103,9 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="song-popup-template" style="display: none;">
+  <div clas="queue-play-song" phx-click="queue-play-song" phx-value-index="{song-index}">Play</div>
+  <div clas="queue-remove-song" phx-click="queue-remove-song" phx-value-index="{song-index}">Remove</div>
 </div>
