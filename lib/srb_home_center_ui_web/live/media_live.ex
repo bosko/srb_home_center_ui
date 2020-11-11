@@ -115,7 +115,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_event("toggle_shuffle", _, socket) do
-    case Mpdex.status().random do
+    case Map.get(Mpdex.status(), :random) do
       "0" ->
         Mpdex.shuffle_queue([])
         Mpdex.random_on()
@@ -129,7 +129,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_event("toggle_mute", _, socket) do
-    if Mpdex.status().volume != "0" do
+    if Map.get(Mpdex.status(), :volume) != "0" do
       Mpdex.volume(0)
     else
       Mpdex.volume(1)
@@ -160,6 +160,29 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   @impl true
   def handle_event("stop_playing", _, socket) do
     Mpdex.stop()
+
+    {:noreply, assign(socket, player_status: Mpdex.status())}
+  end
+
+  @impl true
+  def handle_event("queue_remove_song", %{"index" => index}, socket) do
+    index = String.to_integer(index)
+    Mpdex.remove_song(start: index)
+    queue =
+      case Mpdex.queue() do
+        {:ok, queue} ->
+          queue
+
+        {:error, _} ->
+          []
+      end
+
+    {:noreply, assign(socket, queue: queue)}
+  end
+
+  @impl true
+  def handle_event("queue_play_song", %{"index" => index}, socket) do
+    Mpdex.play(:position, index)
 
     {:noreply, assign(socket, player_status: Mpdex.status())}
   end

@@ -101,12 +101,12 @@
                 <div class="song-actions">
                   <span
                     class="fa fa-minus"
-                    phx-click="queue-remove-song"
-                    phx-value-file="<%= song.file %>"></span>
+                    phx-click="queue_remove_song"
+                    phx-value-index="<%= index %>"></span>
                   <span
                     class="fa fa-play"
-                    phx-click="queue-play-song"
-                    phx-value-file="<%= song.file %>"></span>
+                    phx-click="queue_play_song"
+                    phx-value-index="<%= index %>"></span>
                 </div>
               </div>
             </div>
