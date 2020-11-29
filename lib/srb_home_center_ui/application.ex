@@ -12,9 +12,10 @@ defmodule SrbHomeCenterUi.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: SrbHomeCenterUi.PubSub},
       # Start the Endpoint (http/https)
-      SrbHomeCenterUiWeb.Endpoint
+      SrbHomeCenterUiWeb.Endpoint,
       # Start a worker by calling: SrbHomeCenterUi.Worker.start_link(arg)
       # {SrbHomeCenterUi.Worker, arg}
+      {Mpdex, Application.get_env(:mpdex, :media_server)}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
