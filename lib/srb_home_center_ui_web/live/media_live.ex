@@ -22,6 +22,8 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
       queue: queue
     }
 
+    Mpdex.subscribe()
+
     {:ok, assign(socket, status)}
   end
 
@@ -39,8 +41,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   def handle_event("add-to-queue", %{"file" => file}, socket) do
     Mpdex.add_to_queue(Mpdex, file)
 
-    {:ok, queue} = Mpdex.queue(Mpdex)
-    {:noreply, assign(socket, :queue, queue)}
+    {:noreply, socket}
   end
 
   @impl true
@@ -48,52 +49,19 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
     Mpdex.clear(Mpdex)
     Mpdex.add_to_queue(Mpdex, file)
 
-    {:ok, queue} = Mpdex.queue(Mpdex)
-    {:noreply, assign(socket, :queue, queue)}
+    {:noreply, socket}
   end
 
   @impl true
-  def handle_event("play-previous", _, socket) do
+  def handle_event("play_previous", _, socket) do
     Mpdex.previous(Mpdex)
-
-    queue =
-      case Mpdex.queue(Mpdex) do
-        {:ok, queue} ->
-          queue
-
-        {:error, _} ->
-          []
-      end
-    player_status = Mpdex.status(Mpdex)
-
-    socket =
-      assign(socket,
-        player_status: player_status,
-        currently_playing: currently_playing(queue, player_status)
-      )
 
     {:noreply, socket}
   end
 
   @impl true
-  def handle_event("play-next", _, socket) do
+  def handle_event("play_next", _, socket) do
     Mpdex.next(Mpdex)
-
-    queue =
-      case Mpdex.queue(Mpdex) do
-        {:ok, queue} ->
-          queue
-
-        {:error, _} ->
-          []
-      end
-    player_status = Mpdex.status(Mpdex)
-
-     socket =
-      assign(socket,
-        player_status: player_status,
-        currently_playing: currently_playing(queue, player_status)
-      )
 
     {:noreply, socket}
   end
@@ -102,16 +70,19 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   def handle_event("inc_volume", _, socket) do
     change_volume(1)
 
-    {:noreply, assign(socket, player_status: Mpdex.status(Mpdex))}
+    {:noreply, socket}
   end
 
   @impl true
   def handle_event("dec_volume", _, socket) do
     change_volume(-1)
 
-    {:noreply, assign(socket, player_status: Mpdex.status(Mpdex))}
+    {:noreply, socket}
   end
 
+  # TODO: Move to notification based processing
+  # currently it seems that MPD does not send notification
+  # when random is set on or off
   @impl true
   def handle_event("toggle_shuffle", _, socket) do
     case Map.get(Mpdex.status(Mpdex), :random) do
@@ -128,18 +99,18 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_event("toggle_mute", _, socket) do
-    if Map.get(Mpdex.status(Mpdex), :volume) != "0" do
+    if Map.get(socket.assigns.player_status, :volume) != "0" do
       Mpdex.volume(Mpdex, 0)
     else
       Mpdex.volume(Mpdex, 1)
     end
 
-    {:noreply, assign(socket, player_status: Mpdex.status(Mpdex))}
+    {:noreply, socket}
   end
 
   @impl true
   def handle_event("play_pause", _, socket) do
-    case Map.get(Mpdex.status(Mpdex), :state) do
+    case Map.get(socket.assigns.player_status, :state) do
       "stop" ->
         Mpdex.play(Mpdex, :position, 0)
 
@@ -153,42 +124,45 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
         nil
     end
 
-    {:noreply, assign(socket, player_status: Mpdex.status(Mpdex))}
+    {:noreply, socket}
   end
 
   @impl true
   def handle_event("stop_playing", _, socket) do
     Mpdex.stop(Mpdex)
 
-    {:noreply, assign(socket, player_status: Mpdex.status(Mpdex))}
+    {:noreply, socket}
   end
 
   @impl true
   def handle_event("queue_remove_song", %{"index" => index}, socket) do
     index = String.to_integer(index)
     Mpdex.remove_song(Mpdex, start: index)
-    queue =
-      case Mpdex.queue(Mpdex) do
-        {:ok, queue} ->
-          queue
 
-        {:error, _} ->
-          []
-      end
-
-    {:noreply, assign(socket, queue: queue)}
+    {:noreply, socket}
   end
 
   @impl true
   def handle_event("queue_play_song", %{"index" => index}, socket) do
     Mpdex.play(Mpdex, :position, index)
 
-    {:noreply, assign(socket, player_status: Mpdex.status(Mpdex))}
+    {:noreply, socket}
   end
 
   @impl true
-  def handle_info(:tick, socket) do
-    {:noreply, assign(socket, lists: [[{:playlist, "nova"}]])}
+  def handle_info({:status, status}, socket) do
+    socket =
+      assign(socket,
+        player_status: status,
+        currently_playing: currently_playing(socket.assigns.queue, status)
+      )
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:queue, queue}, socket) do
+    {:noreply, assign(socket, queue: queue)}
   end
 
   defp currently_playing(queue, player_status = %{}) do
