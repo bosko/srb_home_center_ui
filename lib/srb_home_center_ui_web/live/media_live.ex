@@ -68,14 +68,14 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_event("inc_volume", _, socket) do
-    change_volume(1)
+    change_volume(1, socket.assigns.player_status)
 
     {:noreply, socket}
   end
 
   @impl true
   def handle_event("dec_volume", _, socket) do
-    change_volume(-1)
+    change_volume(-1, socket.assigns.player_status)
 
     {:noreply, socket}
   end
@@ -178,8 +178,8 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
     end
   end
 
-  defp change_volume(amount) when is_integer(amount) do
-    volume = Map.get(Mpdex.Status.status(), :volume, "0") |> String.to_integer()
+  defp change_volume(amount, status) when is_integer(amount) do
+    volume = Map.get(status, :volume, "0") |> String.to_integer()
 
     if (amount == 1 && volume < 100) || (amount == -1 && volume > 0) do
       Mpdex.volume(Mpdex, volume + amount)
