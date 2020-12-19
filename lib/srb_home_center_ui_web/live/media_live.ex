@@ -13,10 +13,12 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
           []
       end
 
+    lists = Mpdex.list(Mpdex)
+    {:ok, songs} = Mpdex.get(Mpdex, hd(lists).playlist)
     status = %{
-      lists: Mpdex.list(Mpdex),
-      loaded_list: nil,
-      songs: [],
+      lists: lists,
+      loaded_list: hd(lists).playlist,
+      songs: songs,
       player_status: player_status,
       currently_playing: currently_playing(queue, player_status),
       queue: queue
@@ -29,12 +31,8 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
 
   @impl true
   def handle_event("select_list", %{"selected-list" => list_name}, socket) do
-    if list_name == "" do
-      {:noreply, assign(socket, loaded_list: nil, songs: [])}
-    else
-      {:ok, songs} = Mpdex.get(Mpdex, list_name)
-      {:noreply, assign(socket, loaded_list: list_name, songs: songs)}
-    end
+    {:ok, songs} = Mpdex.get(Mpdex, list_name)
+    {:noreply, assign(socket, loaded_list: list_name, songs: songs)}
   end
 
   @impl true

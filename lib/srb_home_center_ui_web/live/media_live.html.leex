@@ -5,7 +5,6 @@
     <div class="lists">
       <form phx-change="select_list">
         <select name="selected-list">
-          <option></option>
           <%= options_for_select(Enum.map(@lists, fn list -> list.playlist end), @loaded_list) %>
         </select>
       </form>
