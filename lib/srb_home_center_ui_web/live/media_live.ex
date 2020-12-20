@@ -16,6 +16,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
     lists = Mpdex.list(Mpdex)
     {:ok, songs} = Mpdex.get(Mpdex, hd(lists).playlist)
     status = %{
+      active_tab: "player",
       lists: lists,
       loaded_list: hd(lists).playlist,
       songs: songs,
@@ -30,13 +31,18 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   end
 
   @impl true
+  def handle_event("show_tab", %{"tab" => tab}, socket) do
+    {:noreply, assign(socket, active_tab: tab)}
+  end
+
+  @impl true
   def handle_event("select_list", %{"selected-list" => list_name}, socket) do
     {:ok, songs} = Mpdex.get(Mpdex, list_name)
     {:noreply, assign(socket, loaded_list: list_name, songs: songs)}
   end
 
   @impl true
-  def handle_event("add-to-queue", %{"file" => file}, socket) do
+  def handle_event("add_to_queue", %{"file" => file}, socket) do
     Mpdex.add_to_queue(Mpdex, file)
 
     {:noreply, socket}
