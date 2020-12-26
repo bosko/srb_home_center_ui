@@ -3,7 +3,7 @@
   background: $card-color 0% 0% no-repeat padding-box;
   color: white;
   width: 365px;
-  height: 375px;
+  height: 460px;
 
   nav {
     margin-bottom: 7px;
@@ -109,10 +109,10 @@
     }
 
     .queue {
-      height: 190px;
+      height: 290px;
 
       .songs {
-        height: 175px;
+        height: 265px;
       }
 
       .song-actions {
@@ -129,11 +129,11 @@
       padding-right: 18px;
 
       .songs {
-        height: 266px;
+        height: 310px;
       }
 
       form {
-        margin-bottom: 0px;
+        margin-bottom: 15px;
       }
 
       select {
