@@ -3,7 +3,7 @@
   background: $card-color 0% 0% no-repeat padding-box;
   color: white;
   width: 365px;
-  height: 460px;
+  height: 550px;
 
   nav {
     margin-bottom: 7px;
@@ -109,10 +109,10 @@
     }
 
     .queue {
-      height: 290px;
+      height: 376px;
 
       .songs {
-        height: 265px;
+        height: 353px;
       }
 
       .song-actions {
@@ -125,11 +125,8 @@
     }
 
     .lists {
-      min-width: 0;
-      padding-right: 18px;
-
       .songs {
-        height: 310px;
+        height: 396px;
       }
 
       form {
@@ -229,6 +226,29 @@
             cursor: pointer;
             margin-bottom: 3px;
           }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-device-width: 375px)
+and (max-device-width: 812px) {
+  .card {
+    width: 100%;
+
+    .multimedia {
+      .queue {
+        height: 337px;
+
+        .songs {
+          height: 313px;
+        }
+      }
+
+      .lists {
+        .songs {
+          height: 359px;
         }
       }
     }
