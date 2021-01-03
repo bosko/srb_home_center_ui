@@ -10,17 +10,21 @@ document.addEventListener("DOMContentLoaded", function() {
       e.preventDefault()
       e.stopPropagation()
 
-      if (this.parentNode.classList.contains('shown-actions')) {
-        this.parentNode.classList.remove("shown-actions")
-        this.parentNode.classList.add("hidden-actions")
+      document.querySelectorAll(".song-data.shown-actions").forEach(function(el) {
+        el.classList.remove("shown-actions")
+        el.classList.add("hidden-actions")
+      })
 
-        this.parentNode.previousElementSibling.className = "inactive-mobile-actions"
-      } else {
-        this.parentNode.classList.add("shown-actions")
-        this.parentNode.classList.remove("hidden-actions")
+      this.parentNode.classList.add("shown-actions")
+      this.parentNode.classList.remove("hidden-actions")
 
-        this.parentNode.previousElementSibling.className = "active-mobile-actions"
-      }
+      document.querySelectorAll(".song-data.active-mobile-actions").forEach(function(el) {
+        el.classList.remove("active-mobile-actions")
+        el.classList.add("inactive-mobile-actions")
+      })
+
+      this.parentNode.previousElementSibling.classList.add("active-mobile-actions")
+      this.parentNode.previousElementSibling.classList.remove("inactive-mobile-actions")
     })
   })
 })

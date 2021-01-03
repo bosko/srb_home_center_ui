@@ -58,14 +58,6 @@
     .songs {
       overflow: auto;
 
-      .inactive-mobile-actions {
-        display: none;
-      }
-
-      .active-mobile-actions {
-        display: none;
-      }
-
       .current-song {
         color: $orange-color;
         border-left: 3px solid $orange-color;
@@ -103,6 +95,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
           }
+
         }
 
         .song-actions {
@@ -113,6 +106,14 @@
             cursor: pointer;
           }
         }
+      }
+
+      .inactive-mobile-actions {
+        display: none;
+      }
+
+      .active-mobile-actions {
+        display: none;
       }
     }
 
@@ -256,28 +257,31 @@ and (max-width: 830px) {
         }
 
         .inactive-mobile-actions {
-          display: none;
+          position: absolute;
+          transform: rotateX(90deg);
         }
 
         .active-mobile-actions {
-          display: block;
           flex: 1;
+          display: inherit;
+          position: static;
+          transform: rotateX(0deg);
         }
 
         .song-data {
           flex: 1;
+          transition: visibility 0.5s, transform 0.5s;
         }
 
-        .song-data.shown-actions{
-          width: 100px;
+        .shown-actions{
           flex: 1;
-          transition: transform 0.5s;
-          transform: translateX(100px);
+          position: absolute;
+          transform: rotateX(90deg);
         }
 
-        .song-data.hidden-actions{
-          transition: transform 0.5s;
-          transform: translateX(0px);
+        .hidden-actions{
+          transform: rotateX(0deg);
+          position: static;
         }
       }
 
