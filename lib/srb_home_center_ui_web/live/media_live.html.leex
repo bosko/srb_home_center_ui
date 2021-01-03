@@ -59,40 +59,42 @@
 
       <div class="queue">
         <div class="songs-head">
-          <div class="column">
-            Name
-          </div>
-          <div class="column">
-            Duration
-          </div>
+          <div>Name</div>
+          <div>Duration</div>
         </div>
 
         <div class="songs">
           <%= for {song, index} <- Enum.with_index(@queue) do %>
-            <div
-              class="song-row queue-song <%= queue_song_row_class(index, @player_status) %>"
-              data-queue-index="<%= index %>">
-              <div class="column song-info">
-                <div class="song-name">
-                  <%= song.metadata.title %>
-                </div>
-                <div class="song-details">
-                  <%= "#{song.metadata.artist} - #{song.metadata.album}" %>
-                </div>
+            <div class="song-row">
+              <div class="inactive-mobile-actions">
+                <a href="">Replace queue</a>
+                <a href="">Add to queue</a>
               </div>
-              <div class="column">
-                <div>
-                  <%= display_duration(song.metadata.time) %>
+              <div
+                class="song-data queue-song <%= queue_song_row_class(index, @player_status) %>"
+                data-queue-index="<%= index %>">
+                <div class="song-info">
+                  <div class="song-name">
+                    <%= song.metadata.title %>
+                  </div>
+                  <div class="song-details">
+                    <%= "#{song.metadata.artist} - #{song.metadata.album}" %>
+                  </div>
                 </div>
-                <div class="song-actions">
-                  <span
-                    class="fa fa-minus"
-                    phx-click="queue_remove_song"
-                    phx-value-index="<%= index %>"></span>
-                  <span
-                    class="fa fa-play"
-                    phx-click="queue_play_song"
-                    phx-value-index="<%= index %>"></span>
+                <div>
+                  <div>
+                    <%= display_duration(song.metadata.time) %>
+                  </div>
+                  <div class="song-actions">
+                    <span
+                      class="fa fa-minus"
+                      phx-click="queue_remove_song"
+                      phx-value-index="<%= index %>"></span>
+                    <span
+                      class="fa fa-play"
+                      phx-click="queue_play_song"
+                      phx-value-index="<%= index %>"></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -111,17 +113,23 @@
       <div class="songs">
         <%= for song <- @songs do %>
           <div class="song-row">
-            <div class="song-info">
-              <div class="song-name">
-                <%= song.metadata.title %>
-              </div>
-              <div class="song-details">
-                <%= "#{song.metadata.artist} - #{song.metadata.album} - #{display_duration(song.metadata.time)}" %>
-              </div>
+            <div class="inactive-mobile-actions">
+              <a href="">Replace queue</a>
+              <a href="">Add to queue</a>
             </div>
-            <div class="song-actions">
-              <span class="fa fa-plus" phx-click="add_to_queue" phx-value-file="<%= song.file %>"></span>
-              <span class="fa fa-play" phx-click="replace-queue" phx-value-file="<%= song.file %>"></span>
+            <div class="song-data">
+              <div class="song-info">
+                <div class="song-name">
+                  <%= song.metadata.title %>
+                </div>
+                <div class="song-details">
+                  <%= "#{song.metadata.artist} - #{song.metadata.album} - #{display_duration(song.metadata.time)}" %>
+                </div>
+              </div>
+              <div class="song-actions">
+                <span class="fa fa-plus" phx-click="add_to_queue" phx-value-file="<%= song.file %>"></span>
+                <span class="fa fa-play" phx-click="replace-queue" phx-value-file="<%= song.file %>"></span>
+              </div>
             </div>
           </div>
         <% end %>

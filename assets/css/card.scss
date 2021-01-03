@@ -58,12 +58,20 @@
     .songs {
       overflow: auto;
 
+      .inactive-mobile-actions {
+        display: none;
+      }
+
+      .active-mobile-actions {
+        display: none;
+      }
+
       .current-song {
         color: $orange-color;
         border-left: 3px solid $orange-color;
       }
 
-      .song-row {
+      .song-data {
         display: flex;
         justify-content: space-between;
         align-items: first baseline;
@@ -232,12 +240,47 @@
   }
 }
 
-@media only screen and (min-device-width: 375px)
-and (max-device-width: 812px) {
+@media only screen and (min-width: 375px)
+and (max-width: 830px) {
   .card {
     width: 100%;
 
     .multimedia {
+      .songs {
+        .song-row {
+          display: flex;
+        }
+
+        .song-actions {
+          display: none;
+        }
+
+        .inactive-mobile-actions {
+          display: none;
+        }
+
+        .active-mobile-actions {
+          display: block;
+          flex: 1;
+        }
+
+        .song-data {
+          flex: 1;
+        }
+
+        .song-data.shown-actions{
+          width: 100px;
+          flex: 1;
+          transition: transform 0.5s;
+          transform: translateX(100px);
+        }
+
+        .song-data.hidden-actions{
+          transition: transform 0.5s;
+          transform: translateX(0px);
+        }
+      }
+
       .queue {
         height: 337px;
 
