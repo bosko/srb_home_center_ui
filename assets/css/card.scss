@@ -257,6 +257,7 @@ and (max-width: 830px) {
         }
 
         .inactive-mobile-actions {
+          // This moves element so song data can be shown
           position: absolute;
           transform: rotateX(90deg);
         }
@@ -266,6 +267,32 @@ and (max-width: 830px) {
           display: inherit;
           position: static;
           transform: rotateX(0deg);
+
+          .mobile-button {
+            cursor: pointer;
+            position: relative;
+            margin-top: 6px;
+            color: $body-color;
+            text-decoration: none;
+            border-radius: 5px;
+            background: $orange-color;
+            text-align: center;
+            padding: 2px 5px 2px;
+
+            -webkit-transition: all 0.1s;
+            -moz-transition: all 0.1s;
+            transition: all 0.1s;
+          }
+
+          .mobile-button:active{
+            position: relative;
+            top: 4px;
+          }
+
+          .mobile-close {
+            color: $orange-color;
+            font-size: 15px;
+          }
         }
 
         .song-data {
@@ -275,6 +302,7 @@ and (max-width: 830px) {
 
         .shown-actions{
           flex: 1;
+          // This moves element so mobile actions can be shown
           position: absolute;
           transform: rotateX(90deg);
         }

@@ -67,8 +67,9 @@
           <%= for {song, index} <- Enum.with_index(@queue) do %>
             <div class="song-row">
               <div class="song-data inactive-mobile-actions">
-                <a href="">Replace queue</a>
-                <a href="">Add to queue</a>
+                <div class="mobile-button">Remove</div>
+                <div class="mobile-button">Play</div>
+                <div class="mobile-close fa fa-times-circle"></div>
               </div>
               <div
                 class="song-data queue-song <%= queue_song_row_class(index, @player_status) %>"
@@ -114,8 +115,9 @@
         <%= for song <- @songs do %>
           <div class="song-row">
             <div class="song-data inactive-mobile-actions">
-              <a href="">Replace queue</a>
-              <a href="">Add to queue</a>
+              <div class="mobile-button">Replace</div>
+              <div class="mobile-button">Add</div>
+              <div class="mobile-close fa fa-times-circle"></div>
             </div>
             <div class="song-data hidden-actions">
               <div class="song-info">
