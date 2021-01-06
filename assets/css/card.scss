@@ -23,7 +23,7 @@
     }
 
     li.active {
-      background-color: $orange-color;
+      background-color: $amber-color;
       color: $body-color;
     }
   }
@@ -47,11 +47,11 @@
     .songs-head {
       display: flex;
       justify-content: space-between;
-      color: $orange-color;
+      color: $amber-color;
       font-family: Roboto;
       font-weight: 300;
       font-size: 18px;
-      border-bottom: 1px solid $orange-color;
+      border-bottom: 1px solid $amber-color;
       padding-bottom: 5px;
     }
 
@@ -59,8 +59,8 @@
       overflow: auto;
 
       .current-song {
-        color: $orange-color;
-        border-left: 3px solid $orange-color;
+        color: $amber-color;
+        border-left: 3px solid $amber-color;
       }
 
       .song-data {
@@ -100,7 +100,7 @@
 
         .song-actions {
           flex: 0 0 13%;
-          color: $orange-color;
+          color: $amber-color;
 
           span {
             cursor: pointer;
@@ -163,7 +163,7 @@
         margin-bottom: 10px;
 
         .volume {
-          color: $orange-color;
+          color: $amber-color;
           text-align: center;
           flex: 0 0 15%;
           display: flex;
@@ -275,7 +275,7 @@ and (max-width: 830px) {
             color: $body-color;
             text-decoration: none;
             border-radius: 5px;
-            background: $orange-color;
+            background: $amber-color;
             text-align: center;
             padding: 2px 5px 2px;
 
@@ -290,7 +290,7 @@ and (max-width: 830px) {
           }
 
           .mobile-close {
-            color: $orange-color;
+            color: $amber-color;
             font-size: 15px;
           }
         }
