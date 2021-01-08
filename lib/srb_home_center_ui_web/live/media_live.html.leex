@@ -67,8 +67,16 @@
           <%= for {song, index} <- Enum.with_index(@queue) do %>
             <div class="song-row">
               <div class="song-data inactive-mobile-actions">
-                <div class="mobile-button">Remove</div>
-                <div class="mobile-button">Play</div>
+                <div class="mobile-button"
+                     phx-click="queue_remove_song"
+                     phx-value-index="<%= index %>">
+                  Remove
+                </div>
+                <div class="mobile-button"
+                     phx-click="queue_play_song"
+                     phx-value-index="<%= index %>">
+                  Play
+                </div>
                 <div class="mobile-close fa fa-times-circle"></div>
               </div>
               <div
@@ -115,8 +123,12 @@
         <%= for song <- @songs do %>
           <div class="song-row">
             <div class="song-data inactive-mobile-actions">
-              <div class="mobile-button">Replace</div>
-              <div class="mobile-button">Add</div>
+              <div class="mobile-button" phx-click="add_to_queue" phx-value-file="<%= song.file %>">
+                Add
+              </div>
+              <div class="mobile-button" phx-click="replace_queue" phx-value-file="<%= song.file %>">
+                Replace
+              </div>
               <div class="mobile-close fa fa-times-circle"></div>
             </div>
             <div class="song-data hidden-actions">
@@ -130,7 +142,7 @@
               </div>
               <div class="song-actions">
                 <span class="fa fa-plus" phx-click="add_to_queue" phx-value-file="<%= song.file %>"></span>
-                <span class="fa fa-play" phx-click="replace-queue" phx-value-file="<%= song.file %>"></span>
+                <span class="fa fa-play" phx-click="replace_queue" phx-value-file="<%= song.file %>"></span>
               </div>
             </div>
           </div>

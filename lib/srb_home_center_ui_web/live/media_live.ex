@@ -49,7 +49,7 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   end
 
   @impl true
-  def handle_event("replace-queue", %{"file" => file}, socket) do
+  def handle_event("replace_queue", %{"file" => file}, socket) do
     Mpdex.clear(Mpdex)
     Mpdex.add_to_queue(Mpdex, file)
 
