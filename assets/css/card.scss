@@ -95,7 +95,12 @@
             overflow: hidden;
             text-overflow: ellipsis;
           }
+        }
 
+        .duration-actions {
+          flex: 0 0 16%;
+          display: flex;
+          flex-direction: column;
         }
 
         .song-actions {
@@ -253,6 +258,10 @@
 
         .song-actions {
           display: none;
+        }
+
+        .song-duration {
+          flex: 0 0 16%;
         }
 
         .inactive-mobile-actions {
