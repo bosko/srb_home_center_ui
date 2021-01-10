@@ -55,7 +55,7 @@
           <i class="fa fa-volume-mute mobile-button <%= status_flag_class(@player_status, :volume) %>"
              phx-click="toggle_mute"></i>
 
-          <i class="mobile-button">...</i>
+          <i class="mobile-button" id="mpd-extra-cmds">...</i>
         </div>
       </div>
 
@@ -152,4 +152,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="mpd-context-menu-template" class="hidden">
+  <div class="menu-item" phx-click="mpd_reset_connection">Reset connection</div>
 </div>

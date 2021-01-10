@@ -1,8 +1,50 @@
-// import tippy from "tippy.js"
-// import "tippy.js/dist/tippy.css";
-// import "tippy.js/themes/light-border.css";
+import tippy from "tippy.js"
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light-border.css";
+
+const setupMpdContextMenu = () => {
+  let extraMenuBtn = document.querySelector("#mpd-extra-cmds")
+  let extraMenu = tippy(extraMenuBtn, {
+    content: 'Reset connection',
+    placement: 'left-start',
+    trigger: 'manual',
+    allowHTML: true,
+    interactive: true,
+    arrow: false,
+    offset: [0, 0],
+    content(reference) {
+      const template = document.querySelector("#mpd-context-menu-template")
+      return template.innerHTML
+    }
+  })
+
+  extraMenuBtn.addEventListener("click", (e) => {
+    e.preventDefault()
+
+    extraMenu.setProps({
+      getReferenceClientRect: () => ({
+        width: 0,
+        height: 0,
+        top: e.clientY,
+        bottom: e.clientY,
+        left: e.clientX,
+        right: e.clientX,
+      }),
+    })
+
+    extraMenu.show()
+
+    document.querySelectorAll(".extra div.menu-item").forEach((menuItm) => {
+      menuItm.addEventListener("click", function() {
+        extraMenu.hide()
+      })
+    })
+  })
+}
 
 document.addEventListener("DOMContentLoaded", function() {
+  setupMpdContextMenu()
+
   let songInfos = document.querySelectorAll(".song-info")
 
   songInfos.forEach(function(songInfo) {

@@ -154,6 +154,13 @@ defmodule SrbHomeCenterUiWeb.MediaLive do
   end
 
   @impl true
+  def handle_event("mpd_reset_connection", _, socket) do
+    send(Mpdex, {:tcp_closed, nil})
+
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_info({:status, status}, socket) do
     socket =
       assign(socket,
