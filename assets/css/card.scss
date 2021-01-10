@@ -267,27 +267,6 @@
           position: static;
           transform: rotateX(0deg);
 
-          .mobile-button {
-            cursor: pointer;
-            position: relative;
-            margin-top: 6px;
-            color: $body-color;
-            text-decoration: none;
-            border-radius: 5px;
-            background: $amber-color;
-            text-align: center;
-            padding: 2px 5px 2px;
-
-            -webkit-transition: all 0.1s;
-            -moz-transition: all 0.1s;
-            transition: all 0.1s;
-          }
-
-          .mobile-button:active{
-            position: relative;
-            top: 4px;
-          }
-
           .mobile-close {
             color: $amber-color;
             font-size: 15px;
@@ -324,6 +303,27 @@
         .songs {
           height: 359px;
         }
+      }
+
+      .mobile-button {
+        cursor: pointer;
+        position: relative;
+        margin-top: 6px;
+        color: $body-color;
+        text-decoration: none;
+        border-radius: 5px;
+        background: $amber-color;
+        text-align: center;
+        padding: 2px 5px 2px;
+
+        -webkit-transition: all 0.1s;
+        -moz-transition: all 0.1s;
+        transition: all 0.1s;
+      }
+
+      .mobile-button:active{
+        position: relative;
+        top: 4px;
       }
     }
   }

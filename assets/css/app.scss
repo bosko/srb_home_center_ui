@@ -111,7 +111,7 @@ header {
   background-color: $card-color;
 }
 
-.orange {
+.turned-on {
   color: $amber-color;
 }
 
@@ -122,5 +122,9 @@ header {
 @media only screen and (max-width: 800px) {
   main.container {
     padding: 0 0.1rem;
+  }
+
+  .turned-on {
+    color: white !important;
   }
 }

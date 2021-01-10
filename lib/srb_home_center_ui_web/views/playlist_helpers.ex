@@ -18,10 +18,10 @@ defmodule SrbHomeCenterUiWeb.PlaylistHelpers do
   def status_flag_class(status, flag) do
     cond do
       flag == :volume && Map.get(status, flag) == "0" ->
-        "orange"
+        "turned-on"
 
       flag != :volume && Map.get(status, flag) == "1" ->
-        "orange"
+        "turned-on"
 
       true ->
         ""
